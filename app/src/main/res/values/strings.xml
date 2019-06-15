@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name" translatable="false">G2MDX_task</string>
+    <string name="GOOGLE_API_KEY" translatable="false">AIzaSyCxg-6uz1X6IIU3bYUxXXNsA72SM5_uE9o</string>
+    <string name="facebook_app_id" translatable="false">2234698859900382</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb2234698859900382</string>
+
+    <string name="loginTitle" translatable="false">Login</string>
+    <string name="username" translatable="false">Username</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="loginFb" translatable="false">Login by facevbook</string>
+    <string name="rememberMe" translatable="false">Remember Me</string>
+    <string name="invaledUser" translatable="false">Invalid username and password</string>
+    <string name="success" translatable="false">success</string>
+    <string name="enterUsername" translatable="false">Enter username and password</string>
+
+    <string name="loadNotes" translatable="false">enter and load notes</string>
+    <string name="searchCoutry" translatable="false">Search About Coutry</string>
+    <string name="loadContacts" translatable="false">Load Contacts</string>
+    <string name="mapPage" translatable="false">Map page</string>
+
+    <string name="enterNote" translatable="false">Enter content note</string>
+    <string name="enterDate" translatable="false">Enter Date</string>
+    <string name="saveNote" translatable="false">Save note</string>
+
+    <string name="notesList" translatable="false">Notes List</string>
+    <string name="emptyList" translatable="false">Thers\'s content</string>
+
+    <string name="ensureFromNote" translatable="false">Enter content and date of Note</string>
+
+    <string name="map_title" translatable="false">Map</string>
+
+    <string name="loadContactsTitle" translatable="false">Load Contacts</string>
+    <string name="needPermission" translatable="false">Need Permistion</string>
+
+    <string name="CachImage" translatable="false">Cach Image whitin internet</string>
+    <string name="LoadImage" translatable="false">Load Image whiteout internet</string>
+
+    <string name="AddingEventTitle" translatable="false">Adding Event</string>
+
+    <string name="addEvent" translatable="false">Add Event</string>
+
+    <string name="eventTitle" translatable="false">Event Title</string>
+    <string name="eventDescription" translatable="false">Event Description</string>
+    <string name="eventLocation" translatable="false">Event Location</string>
+    <string name="eventStartTime" translatable="false">Event Start Time</string>
+    <string name="eventEndTime" translatable="false">Event End Time</string>
+
+    <string name="ensureFromEvent" translatable="false">Ensure from complete Event data</string>
+
+    <string name="shareImage" translatable="false">Share Image</string>
+
+</resources>
