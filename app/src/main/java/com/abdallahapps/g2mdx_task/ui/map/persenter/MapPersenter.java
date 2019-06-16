@@ -58,7 +58,7 @@ public class MapPersenter implements LocationListener {
 
             if (ActivityCompat.checkSelfPermission(APP.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(APP.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             }
-
+            Toast.makeText(APP.context, "get currentLocation", Toast.LENGTH_SHORT).show();
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
 

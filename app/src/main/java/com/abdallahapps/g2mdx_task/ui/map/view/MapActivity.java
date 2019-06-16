@@ -30,8 +30,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
-public class MapActivity extends BaseActivity implements MapView{
+public class MapActivity extends FragmentActivity implements MapView{
 
     MapPersenter mapPersenter;
     // Google Map
@@ -45,6 +46,10 @@ public class MapActivity extends BaseActivity implements MapView{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.arrow_back_white_24);
+        //setSupportActionBar(toolbar);
+
         APP.context=this;
         mapPersenter = new MapPersenter(this);
 
@@ -55,27 +60,20 @@ public class MapActivity extends BaseActivity implements MapView{
             e.printStackTrace();
         }
 
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.arrow_back_white_24);
-        setSupportActionBar(toolbar);
 
-    }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
     private void initilizeMap() {
         if (googleMap == null) {
 
-            SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
+            SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
             supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(GoogleMap map) {
                     googleMap = map;
+                    Toast.makeText(MapActivity.this, "finish init", Toast.LENGTH_SHORT).show();
                     if (Utils.checkPermission(MapActivity.this,Manifest.permission.ACCESS_COARSE_LOCATION)){
                         mapPersenter.getCurreentLocation();
                     }else {
@@ -84,7 +82,6 @@ public class MapActivity extends BaseActivity implements MapView{
 
                 }
             });
-
         }
 
     }
@@ -98,17 +95,15 @@ public class MapActivity extends BaseActivity implements MapView{
     }
 
 
-
     @Override
     public void showNearestSotres(List<Location> storesLocation) {
 
     }
 
 
-
     @Override
     public void showMyLocation(Location myLocation) {
-
+        Toast.makeText(this, ""+myLocation, Toast.LENGTH_SHORT).show();
         mapPersenter.getStoresLocation();            // get nearest stores
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -129,7 +124,7 @@ public class MapActivity extends BaseActivity implements MapView{
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode==LocationRequest){
-            if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
+            if( Utils.checkPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)) {
                 mapPersenter.getCurreentLocation();
             }else
                 Toast.makeText(this, "التطبيق يحتاج أذن لتحديد المكان", Toast.LENGTH_SHORT).show();

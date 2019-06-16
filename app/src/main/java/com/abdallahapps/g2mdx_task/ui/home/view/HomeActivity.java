@@ -17,6 +17,7 @@ import com.abdallahapps.g2mdx_task.ui.map.view.MapActivity;
 import com.abdallahapps.g2mdx_task.ui.notes.view.NotesActivity;
 import com.abdallahapps.g2mdx_task.ui.searchCountry.view.SearchCountryActivity;
 import com.bumptech.glide.Glide;
+import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
@@ -24,6 +25,7 @@ import com.facebook.share.ShareApi;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareButton;
 
 import java.util.Arrays;
 
@@ -31,7 +33,9 @@ import androidx.annotation.Nullable;
 
 public class HomeActivity extends BaseActivity implements HomeView , View.OnClickListener {
 
-    Button mShowNotesBTN,mSearchCountryBTN,mLoadContactsBTN,mMapPageBTN,mCachImageBtn,mLoadImageBtn,mAddingEventBtn,mShareImageBtn;
+    Button mShowNotesBTN,mSearchCountryBTN,mLoadContactsBTN,mMapPageBTN,mCachImageBtn,mLoadImageBtn,mAddingEventBtn;
+    ShareButton mShareImageBtn;
+
     ImageView LoadIV;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class HomeActivity extends BaseActivity implements HomeView , View.OnClic
         mCachImageBtn=findViewById(R.id.mCachImageBtn);
         mLoadImageBtn=findViewById(R.id.mLoadImageBtn);
         mAddingEventBtn=findViewById(R.id.mAddingEventBtn);
-        mShareImageBtn =findViewById(R.id.mShareImageBtn);
+        mShareImageBtn = (ShareButton) findViewById(R.id.mShareImageBtn);
 
         mShowNotesBTN.setOnClickListener(this);
         mSearchCountryBTN.setOnClickListener(this);
@@ -59,17 +63,26 @@ public class HomeActivity extends BaseActivity implements HomeView , View.OnClic
         mCachImageBtn.setOnClickListener(this);
         mLoadImageBtn.setOnClickListener(this);
         mAddingEventBtn.setOnClickListener(this);
-        mShareImageBtn.setOnClickListener(this);
+        //mShareImageBtn.setOnClickListener(this);
+
+        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(image)
+                .build();
+
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
+                .build();
+
+        mShareImageBtn.setShareContent(content);
     }
 
     @Override
     public void onSuccess() {
-
     }
 
     @Override
     public void onError(int type) {
-
     }
 
     @Override
@@ -103,35 +116,7 @@ public class HomeActivity extends BaseActivity implements HomeView , View.OnClic
             }
 
             case R.id.mShareImageBtn:{
-                LoginManager.getInstance().logInWithPublishPermissions(this, Arrays.asList("publish_actions"));
 
-                Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-                SharePhoto photo = new SharePhoto.Builder()
-                        .setBitmap(image)
-                        .build();
-
-                SharePhotoContent content = new SharePhotoContent.Builder()
-                        .addPhoto(photo)
-                        .build();
-
-                ShareApi.share(content, new FacebookCallback<Sharer.Result>() {
-                    @Override
-                    public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(HomeActivity.this, "sucess", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Toast.makeText(HomeActivity.this, ""+error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(HomeActivity.this, ""+error.toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
                 break;
             }
 

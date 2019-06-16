@@ -27,7 +27,9 @@ android {
 }
 
 repositories {
+    google()
     mavenCentral()
+
 }
 
 dependencies {
@@ -53,7 +55,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.0'
 
     // facebook
-    implementation 'com.facebook.android:facebook-android-sdk:4.42.0'
+    implementation 'com.facebook.android:facebook-android-sdk:5.0.3'
+    //implementation 'com.facebook.android:facebook-share:[5,6)'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
